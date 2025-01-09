@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float moveX;
 
-    public float speed = 5;
+    public float speed;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // moveX = Input.GetAxis("Horizontal");
+
     }
 
     void FixedUpdate()
