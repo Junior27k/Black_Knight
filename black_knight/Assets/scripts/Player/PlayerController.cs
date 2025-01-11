@@ -30,6 +30,6 @@ public class PlayerController : MonoBehaviour
 
     void move()
     {
-        rb.linearVelocity = new Vector2(moveX * speed, rb.linearVelocity.y);
+        rb.velocity = new Vector2(moveX * speed, rb.linearVelocity.y);
     }
 }
