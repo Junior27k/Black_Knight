@@ -19,8 +19,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveX = Input.GetAxis("Horizontal");
-
+        moveX = Input.GetAxisRaw("Horizontal");
     }
 
     void FixedUpdate()
@@ -30,6 +29,6 @@ public class PlayerController : MonoBehaviour
 
     void move()
     {
-        rb.velocity = new Vector2(moveX * speed, rb.linearVelocity.y);
+        rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
     }
 }
