@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public int addJumps;
     public bool isGrounded;
-    public float JumpForce = 5;
+    public float JumpForce = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -24,22 +24,11 @@ public class PlayerController : MonoBehaviour
     {
         moveX = Input.GetAxisRaw("Horizontal");
 
-        if (isGrounded)
+        if (Input.GetButtonDown("Jump") && addJumps > 0)
         {
-            addJumps = 2;
-            if (Input.GetButtonDown("Jump") && addJumps > 0)
-            {
-                Jump();
-            }
+            Jump();
         }
-        else
-        {
-            if (Input.GetButtonDown("Jump")  && addJumps > 0)
-            {
-                addJumps--;
-                Jump();
-            }
-        }
+
 
     }
 
@@ -58,7 +47,7 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, JumpForce);
-
+        addJumps--;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -66,6 +55,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
+            addJumps = 2;
         }
     }
 
