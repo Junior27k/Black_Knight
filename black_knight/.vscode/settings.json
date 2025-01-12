@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "black_knight.sln"
+    "dotnet.defaultSolution": "black_knight.sln",
+    "dotnet.preferCSharpExtension": true
 }

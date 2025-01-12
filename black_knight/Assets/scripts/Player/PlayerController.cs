@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private Animatr anim;
+    private Animator anim;
     private float moveX;
 
     public float speed;
@@ -43,23 +43,19 @@ public class PlayerController : MonoBehaviour
     void move()
     {
         rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
-
-    
-
         if (moveX > 0)
         {
             transform.eulerAngles = new Vector3(0f, 0f, 0f);
-            anim.setBool("isRun", true);
+            anim.SetBool("IsRun", true);
         }
         else if (moveX < 0)
         {
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
-            anim.setBool("isRun", true);
+            anim.SetBool("IsRun", true);
         }
         else
         {
-            anim.setBool("isRun", false);
-
+            anim.SetBool("IsRun", false);
         }
     }
 
@@ -76,6 +72,7 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
             addJumps = 2;
+            anim.SetBool("IsJump", false);
         }
     }
 
@@ -84,6 +81,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGrounded = false;
+            anim.SetBool("IsJump", true);
         }
     }
 }
