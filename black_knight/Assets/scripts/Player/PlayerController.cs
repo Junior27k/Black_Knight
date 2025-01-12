@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        moveX = Input.GetAxisRaw("Horizontal");
+        // moveX = Input.GetAxisRaw("Horizontal");
     }
 
     // Update is called once per frame
