@@ -24,20 +24,28 @@ public class PlayerController : MonoBehaviour
     {
         moveX = Input.GetAxisRaw("Horizontal");
 
+        if (isGrounded)
+        {
+            addJumps = 2;
+            if (Input.GetButtonDown("Jump") && addJumps > 0)
+            {
+                Jump();
+            }
+        }
+        else
+        {
+            if (Input.GetButtonDown("Jump")  && addJumps > 0)
+            {
+                addJumps--;
+                Jump();
+            }
+        }
+
     }
 
     void FixedUpdate()
     {
         move();
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            if (isGrounded)
-            {
-                addJumps = 2;
-            }
-            Jump();
-        }
 
     }
 
@@ -49,16 +57,13 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (addJumps > 0)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, JumpForce);
-            addJumps--;
-        }
+        rb.velocity = new Vector2(rb.velocity.x, JumpForce);
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-         if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
         }
