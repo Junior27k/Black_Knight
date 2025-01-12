@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private Animatr anim;
     private float moveX;
 
     public float speed;
@@ -16,7 +17,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        // moveX = Input.GetAxisRaw("Horizontal");
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -42,16 +43,29 @@ public class PlayerController : MonoBehaviour
     void move()
     {
         rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
-        if(moveX > 0){
-            transform.eulerAngles = new Vector3(0f, 0f, 0f); 
-        } else if(moveX < 0) {
-            transform.eulerAngles = new Vector3(0f, 180f, 0f); 
-        }
 
+    
+
+        if (moveX > 0)
+        {
+            transform.eulerAngles = new Vector3(0f, 0f, 0f);
+            anim.setBool("isRun", true);
+        }
+        else if (moveX < 0)
+        {
+            transform.eulerAngles = new Vector3(0f, 180f, 0f);
+            anim.setBool("isRun", true);
+        }
+        else
+        {
+            anim.setBool("isRun", false);
+
+        }
     }
 
     void Jump()
     {
+
         rb.velocity = new Vector2(rb.velocity.x, JumpForce);
         addJumps--;
     }
