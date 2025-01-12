@@ -42,6 +42,12 @@ public class PlayerController : MonoBehaviour
     void move()
     {
         rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
+        if(moveX > 0){
+            transform.eulerAngles = new Vector3(0f, 0f, 0f); 
+        } else if(moveX < 0) {
+            transform.eulerAngles = new Vector3(0f, 180f, 0f); 
+        }
+
     }
 
     void Jump()
