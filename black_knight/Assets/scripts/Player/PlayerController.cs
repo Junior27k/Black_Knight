@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     public float JumpForce = 7;
     public int life;
+    public TextMeshProUGUI textLife;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
+        textLife.text = life.ToString();
 
     }
 
