@@ -538,11 +538,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-<<<<<<< HEAD
   m_Material: {fileID: 0}
-=======
-  m_Material: {fileID: 6200000, guid: 546562159b544c4458fbb3d3f5938de2, type: 2}
->>>>>>> Stashed changes
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
