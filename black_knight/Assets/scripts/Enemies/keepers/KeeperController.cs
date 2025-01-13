@@ -29,20 +29,22 @@ public class KeeperController : MonoBehaviour
             return;
         }
 
-        goRight = Vector2.Distance(transform.position, a.position) < 0.1f;
+        // Move the enemy from an point to another
 
         if (goRight)
-        {   
+        {
+            goRight = Vector2.Distance(transform.position, b.position) < 0.1f;
             transform.eulerAngles = new Vector3(0f, 0f, 0f);
-            transform.position = Vector2.MoveTowards(transform.position, b.position, speed * Time.deltaTime);
-
         }
         else
         {
+            goRight = Vector2.Distance(transform.position, a.position) < 0.1f;
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
-            transform.position = Vector2.MoveTowards(transform.position, a.position, speed * Time.deltaTime);
 
         }
+
+        Vector3 to = goRight ? b.position : a.position;
+        transform.position = Vector2.MoveTowards(transform.position, to, speed * Time.deltaTime);
 
     }
 }
