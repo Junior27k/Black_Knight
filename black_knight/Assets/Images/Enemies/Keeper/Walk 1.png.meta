@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: eb57036441150a14bafb5a88e48101fc
+guid: 589aa6f92d6d9914089ca35c4bacf678
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Attack_0
+      name: Walk_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 43
-        height: 37
+        width: 22
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8b19284fc4030747ac17c06173adbba
-      internalID: 778927595
+      spriteID: 985c5f031b9e2734485f75f7e1d3e045
+      internalID: -870736210
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_1
+      name: Walk_1
       rect:
         serializedVersion: 2
-        x: 43
+        x: 22
         y: 0
-        width: 43
-        height: 37
+        width: 22
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24b4867b36e3ed645b1b1895a6424713
-      internalID: -1293777670
+      spriteID: 228e010d2e469d24fa9abcd70be00992
+      internalID: 2106567899
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_2
+      name: Walk_2
       rect:
         serializedVersion: 2
-        x: 86
+        x: 44
         y: 0
-        width: 43
-        height: 37
+        width: 22
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: abaf4cd9c758ffb4d84054bf6442baa0
-      internalID: 246065977
+      spriteID: 0a09a61b640325e4c9e466380b7ae192
+      internalID: -1537012806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_3
+      name: Walk_3
       rect:
         serializedVersion: 2
-        x: 129
+        x: 66
         y: 0
-        width: 43
-        height: 37
+        width: 22
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f51b3e11f11ebdf43887ab504c5f0630
-      internalID: -1149722473
+      spriteID: 08f701f5d777d5744b2462fa74d4883d
+      internalID: 2089989838
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_4
+      name: Walk_4
       rect:
         serializedVersion: 2
-        x: 172
+        x: 88
         y: 0
-        width: 43
-        height: 37
+        width: 22
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eeeaef7768f0acb48a52dfdb564c7043
-      internalID: 1581612797
+      spriteID: c5c0b2c5d253b1445b05666bdc971601
+      internalID: -1402022507
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_5
+      name: Walk_5
       rect:
         serializedVersion: 2
-        x: 215
+        x: 110
         y: 0
-        width: 43
-        height: 37
+        width: 22
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2f3f90d27d74fe4c8caa1e405ab2072
-      internalID: 1078406605
+      spriteID: d7c9040f854ba67468ddc596446d465c
+      internalID: -913886773
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_6
+      name: Walk_6
       rect:
         serializedVersion: 2
-        x: 258
+        x: 132
         y: 0
-        width: 43
-        height: 37
+        width: 22
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,20 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c080e1e7b83be846be011334e65fbc9
-      internalID: -8149627
+      spriteID: c1b95430af1aef64891601769d87c01f
+      internalID: 119013271
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_7
+      name: Walk_7
       rect:
         serializedVersion: 2
-        x: 301
+        x: 154
         y: 0
-        width: 43
-        height: 37
+        width: 22
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,20 +284,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d752e5a87dcb807478728e03b2d50b51
-      internalID: -390198570
+      spriteID: 512cb94e2dfde684bbd40dd244845988
+      internalID: -884635672
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_8
+      name: Walk_8
       rect:
         serializedVersion: 2
-        x: 344
+        x: 176
         y: 0
-        width: 43
-        height: 37
+        width: 22
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -305,20 +305,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e82cf4921b5afa744b79b3609d2e31d2
-      internalID: 617523066
+      spriteID: 5bb386d049f609b4c80b08aab8a6b307
+      internalID: -1613711870
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_9
+      name: Walk_9
       rect:
         serializedVersion: 2
-        x: 387
+        x: 198
         y: 0
-        width: 43
-        height: 37
+        width: 22
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -326,20 +326,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d9ddb43c8c95784cacd4d9a0f499367
-      internalID: -2055601468
+      spriteID: 4e337522c712baa43b0b5e92aef901b8
+      internalID: 2003531093
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_10
+      name: Walk_10
       rect:
         serializedVersion: 2
-        x: 430
+        x: 220
         y: 0
-        width: 43
-        height: 37
+        width: 22
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -347,20 +347,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 562d18036472c924a8b12541b657920c
-      internalID: -76132586
+      spriteID: ee1452328a936fa4f901c1d8ac610875
+      internalID: -1876188241
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_11
+      name: Walk_11
       rect:
         serializedVersion: 2
-        x: 473
+        x: 242
         y: 0
-        width: 43
-        height: 37
+        width: 22
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,20 +368,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36dcba2285c131a43bf5d4ee9602b40f
-      internalID: -300501879
+      spriteID: 219375eb5e3fd9d4e9fd02c4b5972d63
+      internalID: 47819490
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_12
+      name: Walk_12
       rect:
         serializedVersion: 2
-        x: 516
+        x: 264
         y: 0
-        width: 43
-        height: 37
+        width: 22
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,113 +389,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 319c8b048164599449c00346fef215ec
-      internalID: 848758820
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_13
-      rect:
-        serializedVersion: 2
-        x: 559
-        y: 0
-        width: 43
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5acba4eb6d77c6b4aa6395f91afa3698
-      internalID: -1042896820
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_14
-      rect:
-        serializedVersion: 2
-        x: 602
-        y: 0
-        width: 43
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 40f0d98bd371b754aba41830a7f05b19
-      internalID: -112217863
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_15
-      rect:
-        serializedVersion: 2
-        x: 645
-        y: 0
-        width: 43
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c7680a9caa5d6414a99813b1fc79319c
-      internalID: 2021344619
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_16
-      rect:
-        serializedVersion: 2
-        x: 688
-        y: 0
-        width: 43
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8ffb0d0c6468890469048ac1754c94d1
-      internalID: -1878445113
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_17
-      rect:
-        serializedVersion: 2
-        x: 731
-        y: 0
-        width: 43
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c51a618421712044a8f2ba1bf2776a03
-      internalID: -551167469
+      spriteID: c3e1212b1d0d86c44a708e6f44954a00
+      internalID: 382261181
       vertices: []
       indices: 
       edges: []
@@ -511,24 +406,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Attack_0: 778927595
-      Attack_1: -1293777670
-      Attack_10: -76132586
-      Attack_11: -300501879
-      Attack_12: 848758820
-      Attack_13: -1042896820
-      Attack_14: -112217863
-      Attack_15: 2021344619
-      Attack_16: -1878445113
-      Attack_17: -551167469
-      Attack_2: 246065977
-      Attack_3: -1149722473
-      Attack_4: 1581612797
-      Attack_5: 1078406605
-      Attack_6: -8149627
-      Attack_7: -390198570
-      Attack_8: 617523066
-      Attack_9: -2055601468
+      Walk_0: -870736210
+      Walk_1: 2106567899
+      Walk_10: -1876188241
+      Walk_11: 47819490
+      Walk_12: 382261181
+      Walk_2: -1537012806
+      Walk_3: 2089989838
+      Walk_4: -1402022507
+      Walk_5: -913886773
+      Walk_6: 119013271
+      Walk_7: -884635672
+      Walk_8: -1613711870
+      Walk_9: 2003531093
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
