@@ -164,7 +164,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 93815618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22ba2668b9af90a4ab53b7fa1a03fbb2, type: 3}
+  m_Script: {fileID: 11500000, guid: d84791e7161686f45ac3f7b7406e1406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!58 &93815621
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 490509811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22ba2668b9af90a4ab53b7fa1a03fbb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b6a3c2b590d18343ba1daaf77c7609b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!58 &490509814
@@ -8132,9 +8132,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1862539813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dceda26841a36346ab3ecc7f0f9f44f, type: 3}
+  m_Script: {fileID: 11500000, guid: 57dee073822f79348903df78d18b55eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 5
+  speed: 5
+  a: {fileID: 620471815}
+  b: {fileID: 1638113105}
 --- !u!70 &1862539818
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
