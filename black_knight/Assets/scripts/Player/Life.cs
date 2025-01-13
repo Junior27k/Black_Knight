@@ -15,12 +15,4 @@ public class Life : MonoBehaviour
     {
         
     }
-
-    void OnTriggerEnter2D(CompositeCollider2D collision){
-        if(collision.gameObject.tag == "Player")
-        {
-            PlayerController player = collision.GetComponent<PlayerController>();
-            player.life++;
-        }
-    }
 }
