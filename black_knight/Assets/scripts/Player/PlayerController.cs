@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public int addJumps;
     public bool isGrounded;
     public float JumpForce = 7;
+    public int life;
 
     // Start is called before the first frame update
     void Start()
