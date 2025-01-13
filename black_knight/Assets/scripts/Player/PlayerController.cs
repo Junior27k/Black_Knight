@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public int addJumps;
     public bool isGrounded;
-    public float JumpForce = 10;
+    public float JumpForce = 7;
 
     // Start is called before the first frame update
     void Start()
@@ -35,12 +35,12 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        move();
-
+        Move();
+        Attack();
     }
 
 
-    void move()
+    void Move()
     {
         rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
         if (moveX > 0)
@@ -64,6 +64,12 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = new Vector2(rb.velocity.x, JumpForce);
         addJumps--;
+    }
+
+    void Attack(){
+        if(Input.GetButtonDown("Fire1")){
+            anim.Play("Attack", -1);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
