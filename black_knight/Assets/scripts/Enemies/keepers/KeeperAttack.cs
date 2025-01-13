@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class KeeperAttack : MonoBehaviour
 {
+
+    PlayerController player;
+
     private void OnTriggerStay2D(Collider2D collider){
         if(collider.gameObject.tag == "Player"){
-            collider.GetComponent<PlayerController>().life--;
+            player = collider.GetComponent<PlayerController>();
         }
+    }
+
+    public void damage(){
+        player.life--;
     }
 
 }
