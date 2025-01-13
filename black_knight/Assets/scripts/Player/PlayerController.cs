@@ -6,6 +6,7 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private CapsuleCollider2D colliderPlayer;
     private Animator anim;
     private float moveX;
 
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        colliderPlayer = GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame
@@ -34,6 +36,13 @@ public class PlayerController : MonoBehaviour
         }
 
         textLife.text = life.ToString();
+
+        if(life <= 0){
+            this.enabled = false;
+            colliderPlayer.enabled = false;
+            rb.gravityScale = 0;
+            anim.Play("Die", -1);
+        }
 
     }
 
