@@ -474,11 +474,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31775d5754d967244b2634d7ebf6738e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 8
   addJumps: 0
   isGrounded: 0
   JumpForce: 6
-  life: 1
+  life: 5
   textLife: {fileID: 783674196}
 --- !u!1 &614251566
 GameObject:
@@ -1629,7 +1629,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 15
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 19
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1906,10 +1906,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 1277261121, guid: d9d6fe4e632681446818901ef57353c5, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 1277261121, guid: d9d6fe4e632681446818901ef57353c5, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 805078810, guid: d9d6fe4e632681446818901ef57353c5, type: 3}
   m_TileMatrixArray:
