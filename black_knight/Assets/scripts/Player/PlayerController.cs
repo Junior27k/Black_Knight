@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
+    private CapsuleCollider2D playerCapsule;
     private float moveX;
+    public string levelName;
 
     public float speed;
     public int addJumps;
@@ -21,6 +24,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        playerCapsule = GetComponent<CapsuleCollider2D>();
+
     }
 
     // Update is called once per frame
@@ -40,6 +45,13 @@ public class PlayerController : MonoBehaviour
         {
             Attack();
         }
+
+
+        if(life <= 0 ){
+            Die();
+        }
+
+
 
 
     }
@@ -81,6 +93,15 @@ public class PlayerController : MonoBehaviour
     {
         anim.Play("Attack", -1);
         
+    }
+
+
+    void Die(){
+        this.enabled = false;
+        rb.gravityScale = 0;
+        playerCapsule.enabled = false;
+        anim.Play("Die", -1);
+        SceneManager.LoadScene(levelName);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
