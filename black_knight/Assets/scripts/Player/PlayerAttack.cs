@@ -7,7 +7,7 @@ public class PlayerAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        eril
     }
 
     // Update is called once per frame
