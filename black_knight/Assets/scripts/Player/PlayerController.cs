@@ -35,12 +35,19 @@ public class PlayerController : MonoBehaviour
 
         textLife.text = life.ToString();
 
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Attack();
+        }
+
+
     }
 
     void FixedUpdate()
     {
         Move();
-        Attack();
+
     }
 
 
@@ -70,10 +77,10 @@ public class PlayerController : MonoBehaviour
         addJumps--;
     }
 
-    void Attack(){
-        if(Input.GetButtonDown("Fire1")){
-            anim.Play("Attack", -1);
-        }
+    void Attack()
+    {
+        anim.Play("Attack", -1);
+        
     }
 
     void OnCollisionEnter2D(Collision2D collision)
