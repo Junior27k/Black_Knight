@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Keeper
+  - Gizmo
   layers:
   - Default
   - TransparentFX
