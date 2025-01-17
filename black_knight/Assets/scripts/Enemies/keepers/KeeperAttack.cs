@@ -6,6 +6,7 @@ public class KeeperAttack : MonoBehaviour
 {
 
     //PlayerController player;
+    private bool hit = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,15 +15,4 @@ public class KeeperAttack : MonoBehaviour
             collision.GetComponent<PlayerController>().life--;
         }
     }
-
-    /*private void OnTriggerEnter2D(Collider2D collider){
-        if(collider.gameObject.tag == "Player"){
-            player = collider.GetComponent<PlayerController>();
-        }
-    }
-
-    public void damage(){
-        player.life--;
-    }*/
-
 }

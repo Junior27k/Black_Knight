@@ -51,9 +51,6 @@ public class PlayerController : MonoBehaviour
             Die();
         }
 
-
-
-
     }
 
     void FixedUpdate()
