@@ -3,13 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Ground
-<<<<<<< HEAD
-  - Keeper
-  - Gizmo
-=======
->>>>>>> parent of bbef658 (video 5)
+  tags: []
   layers:
   - Default
   - TransparentFX
