@@ -6,7 +6,6 @@ public class KeeperAttack : MonoBehaviour
 {
 
     //PlayerController player;
-    private bool hit = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
