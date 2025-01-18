@@ -321,6 +321,7 @@ MonoBehaviour:
   speed: 5
   a: {fileID: 9208278566764579158}
   b: {fileID: 8704187477905487745}
+  range: {fileID: 0}
 --- !u!1 &5869104815488962353
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class KeeperController : MonoBehaviour
 
     public int life;
     public float speed;
-
+ 
     public Transform a;
     public Transform b;
     public GameObject range;
@@ -39,7 +39,7 @@ public class KeeperController : MonoBehaviour
         }
 
 
-        if (goRight)
+        if (goRight == true)
         {
             if (Vector2.Distance(transform.position, b.position) < 0.1f)
             {
