@@ -22,22 +22,27 @@ public class KeeperController : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-     void Die(){
-        this.enabled = false;
-        range.SetActive(false);
-        colliderKeeper.enabled = false;
-        range.SetActive(false);
-        anim.Play("Die", -1);
-    }
+    
 
     // Update is called once per frame
     void Update()
     {
+        if(life <= 0){
+            Die();
+
+        }
+
+        void Die(){
+        this.enabled = false;
+        colliderKeeper.enabled = false;
+        range.SetActive(false);
+        anim.Play("Die", -1);
+        }
+
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
             return;
         }
-
 
         if (goRight == true)
         {
@@ -59,10 +64,6 @@ public class KeeperController : MonoBehaviour
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
             transform.position = Vector2.MoveTowards(transform.position, a.position, speed * Time.deltaTime);
 
-        }
-
-        if(life <= 0){
-            Die();
         }
 
     }
