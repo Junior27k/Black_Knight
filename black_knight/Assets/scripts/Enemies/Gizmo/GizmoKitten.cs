@@ -4,22 +4,15 @@ using UnityEngine;
 
 public class GizmoKitten : MonoBehaviour
 {
-    public Transform gizmo;
-    
-    private void OnTriggerEnter2D(Collider2D collision)
+    // Start is called before the first frame update
+    void Start()
     {
-        if(collision.CompareTag("Player"))
-        {
-            gizmo.GetComponent<GizmoController>().enabled= true;
-            gizmo.GetComponent<Animator>().SetBool("IsRun", true);
-        }
+        
     }
-    private void OnTriggerExit2D(Collider2D collision)
+
+    // Update is called once per frame
+    void Update()
     {
-        if(collision.CompareTag("Player"))
-        {
-            gizmo.GetComponent<GizmoController>().enabled= false;
-            gizmo.GetComponent<Animator>().SetBool("IsRun", false);
-        }
+        
     }
 }

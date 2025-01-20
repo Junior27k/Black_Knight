@@ -5,16 +5,14 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     // Start is called before the first frame update
-    private void OnTriggerEnter2D(Collider2D collision)
+    void Start()
     {
-        if(collision.CompareTag("Keeper"))
-        {
-            collision.GetComponent<KeeperController>().life--;
-        }
-        if(collision.CompareTag("Gizmo"))
-        {
-            collision.GetComponent<GizmoController>().life--;
-        }
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }
- 
