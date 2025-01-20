@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5125433250868245787}
   m_Layer: 0
   m_Name: Keeper
-  m_TagString: Untagged
+  m_TagString: Keeper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 602579214662419645}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.504581, y: -5.8620377, z: 0}
+  m_LocalPosition: {x: 9.4, y: -3.8, z: 0}
   m_LocalScale: {x: 4.5, y: 4.5, z: 4.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49,7 +49,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1778571822027766994
 Transform:
   m_ObjectHideFlags: 0
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 715238870196618325}
   m_Layer: 0
   m_Name: Skin
-  m_TagString: Untagged
+  m_TagString: Keeper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,8 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57dee073822f79348903df78d18b55eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 5
-  speed: 1
+  life: 3
+  speed: 2
   a: {fileID: 1778571822027766994}
   b: {fileID: 157776412127961225}
   range: {fileID: 2997222067608744084}
@@ -402,7 +402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &157776412127961225
 Transform:
   m_ObjectHideFlags: 0

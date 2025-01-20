@@ -19,9 +19,14 @@ public class PlayerController : MonoBehaviour
     public int life;
     public TextMeshProUGUI textLife;
 
+    public GameObject gameOver;
+    public GameObject canvasPause;
+    public bool isPause;
+
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerCapsule = GetComponent<CapsuleCollider2D>();
@@ -49,6 +54,11 @@ public class PlayerController : MonoBehaviour
 
         if(life <= 0 ){
             Die();
+        }
+
+        if(Input.GetButtonDown("Cancel"))
+        {
+            PauseScreen();
         }
 
     }
@@ -98,7 +108,35 @@ public class PlayerController : MonoBehaviour
         playerCapsule.enabled = false;
         rb.gravityScale = 0;
         anim.Play("Die", -1);
-        SceneManager.LoadScene(levelName);
+        gameOver.SetActive(true);
+    }
+
+    void PauseScreen()
+    {
+        if(isPause)
+        {
+            isPause = false;
+            Time.timeScale = 1;
+            canvasPause.SetActive(false);
+        }
+        else
+        {
+            isPause = true;
+            Time.timeScale = 0;
+            canvasPause.SetActive(true);
+        }
+    }
+
+    public void ResumeGame()
+    {
+        isPause = false;
+        Time.timeScale = 1;
+        canvasPause.SetActive(false);
+    }
+
+    public void BackMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
