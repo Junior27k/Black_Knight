@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    
+    public string level;
+    public void Restart()
     {
-        
+        SceneManager.LoadScene(level);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void BackMenu()
     {
-        
+        SceneManager.LoadScene(0);
     }
 }
