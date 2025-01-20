@@ -51,9 +51,6 @@ public class PlayerController : MonoBehaviour
             Die();
         }
 
-
-
-
     }
 
     void FixedUpdate()
@@ -101,7 +98,7 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = 0;
         playerCapsule.enabled = false;
         anim.Play("Die", -1);
-        SceneManager.LoadScene(levelName);
+        //SceneManager.LoadScene(levelName);
     }
 
     void OnCollisionEnter2D(Collision2D collision)

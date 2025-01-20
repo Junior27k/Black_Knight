@@ -5,16 +5,13 @@ using UnityEngine;
 public class KeeperAttack : MonoBehaviour
 {
 
-    PlayerController player;
+    //PlayerController player;
 
-    private void OnTriggerStay2D(Collider2D collider){
-        if(collider.gameObject.tag == "Player"){
-            player = collider.GetComponent<PlayerController>();
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            collision.GetComponent<PlayerController>().life--;
         }
     }
-
-    public void damage(){
-        player.life--;
-    }
-
 }
