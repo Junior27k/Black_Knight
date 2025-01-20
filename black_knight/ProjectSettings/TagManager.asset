@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Keeper
+<<<<<<< Updated upstream
+=======
+  - Gizmo
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
