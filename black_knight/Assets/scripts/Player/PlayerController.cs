@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Xml.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,10 +19,13 @@ public class PlayerController : MonoBehaviour
     public float JumpForce = 7;
     public int life;
     public TextMeshProUGUI textLife;
-
+    public GameObject GameOver;
+    public GameObject canvasPause;
+    public bool isPause;
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerCapsule = GetComponent<CapsuleCollider2D>();
@@ -49,6 +53,11 @@ public class PlayerController : MonoBehaviour
 
         if(life <= 0 ){
             Die();
+        }
+
+        if(Input.GetButtonDown("Cancel"))
+        {
+            PauseScreen();
         }
 
     }
@@ -95,10 +104,14 @@ public class PlayerController : MonoBehaviour
 
     void Die(){
         this.enabled = false;
-        playerCapsule.enabled = false;
         rb.gravityScale = 0;
+        playerCapsule.enabled = false;
         anim.Play("Die", -1);
-        SceneManager.LoadScene(levelName);
+<<<<<<< Updated upstream
+        //SceneManager.LoadScene(levelName);
+=======
+        GameOver.SetActive(true);
+>>>>>>> Stashed changes
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -118,5 +131,32 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             anim.SetBool("IsJump", true);
         }
+    }
+
+    void PauseScreen()
+    {
+        if(isPause)
+        {
+            isPause = false;
+            Time.timeScale = 1;
+            canvasPause.SetActive(false);
+        }
+        else
+        {
+            isPause = true;
+            Time.timeScale = 0;
+            canvasPause.SetActive(true);
+        }
+    }
+
+    public void ResumeGame()
+    {
+        isPause = false;
+        Time.timeScale = 1;
+        canvasPause.SetActive(false); 
+    }
+    public void BackaToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
