@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Ground
   - Keeper
+<<<<<<< Updated upstream
+=======
+  - Gizmo
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
