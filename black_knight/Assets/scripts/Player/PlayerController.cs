@@ -23,6 +23,14 @@ public class PlayerController : MonoBehaviour
     public GameObject canvasPause;
     public bool isPause;
 
+    private void awake(){
+        //conferir se a cena foi carregada
+        if(PlayerPrefs.GetInt("wasLoaded")== 1 ){
+            life = PlayerPrefs.GetInt("Life", 0);
+            Debug.Log("Game Loaded");
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,23 +45,21 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         moveX = Input.GetAxisRaw("Horizontal");
-
-        if (Input.GetButtonDown("Jump") && addJumps > 0)
-        {
-            Jump();
-        }
-
         textLife.text = life.ToString();
 
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Attack();
+        if(life <= 0){
+            this.enabled = false;
+            playerCapsule.enabled = false;
+            rb.gravityScale = 0;
+            gameOver.SetActive(true);
         }
 
-
-        if(life <= 0 ){
-            Die();
+        //salvar o jogo
+        if(Input.GetKeyDown(KeyCode.P)){
+            string activeScene = SceneManager.GetActiveScene().name;
+            PlayerPrefs.SetString("Nivel Salvo", activeScene);
+            PlayerPrefs.SetInt("Life", life);
+            Debug.Log("Jogo Salvo");
         }
 
         if(Input.GetButtonDown("Cancel"))
@@ -66,6 +72,20 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        Attack();
+
+        if(isGrounded == true){
+            addJumps = 2;
+            if(Input.GetButtonDown("Jump")){
+                Jump();
+            }
+        }
+        else{
+            if(Input.GetButtonDown("Jump") && addJumps > 0){
+                addJumps--;
+                Jump();
+            }
+        }
 
     }
 
@@ -83,7 +103,7 @@ public class PlayerController : MonoBehaviour
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
             anim.SetBool("IsRun", true);
         }
-        else
+        if(moveX == 0)
         {
             anim.SetBool("IsRun", false);
         }
@@ -93,12 +113,15 @@ public class PlayerController : MonoBehaviour
     {
 
         rb.velocity = new Vector2(rb.velocity.x, JumpForce);
-        addJumps--;
+        anim.SetBool("isJump", true);
     }
 
     void Attack()
     {
+        if(Input.GetButtonDown("Fire1")){
         anim.Play("Attack", -1);
+
+        }
         
     }
 
@@ -154,7 +177,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGrounded = false;
-            anim.SetBool("IsJump", true);
+            //anim.SetBool("IsJump", true);
         }
     }
 }
