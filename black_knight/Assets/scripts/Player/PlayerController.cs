@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public GameObject canvasPause;
     public bool isPause;
 
-    private void awake(){
+    private void Awake(){
         //conferir se a cena foi carregada
         if(PlayerPrefs.GetInt("wasLoaded")== 1 ){
             life = PlayerPrefs.GetInt("Life", 0);
@@ -48,10 +48,7 @@ public class PlayerController : MonoBehaviour
         textLife.text = life.ToString();
 
         if(life <= 0){
-            this.enabled = false;
-            playerCapsule.enabled = false;
-            rb.gravityScale = 0;
-            gameOver.SetActive(true);
+            Die();
         }
 
         //salvar o jogo
@@ -67,13 +64,6 @@ public class PlayerController : MonoBehaviour
             PauseScreen();
         }
 
-    }
-
-    void FixedUpdate()
-    {
-        Move();
-        Attack();
-
         if(isGrounded == true){
             addJumps = 2;
             if(Input.GetButtonDown("Jump")){
@@ -86,6 +76,16 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
         }
+        Attack();
+
+    }
+
+    void FixedUpdate()
+    {
+        Move();
+        
+
+        
 
     }
 
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
     {
 
         rb.velocity = new Vector2(rb.velocity.x, JumpForce);
-        anim.SetBool("isJump", true);
+        anim.SetBool("IsJump", true);
     }
 
     void Attack()
@@ -177,7 +177,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGrounded = false;
-            //anim.SetBool("IsJump", true);
+            anim.SetBool("IsJump", true);
         }
     }
 }
