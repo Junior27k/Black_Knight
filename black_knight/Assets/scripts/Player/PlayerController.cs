@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private CapsuleCollider2D playerCapsule;
+    [SerializeField]
     private float moveX;
     public string levelName;
 
@@ -128,8 +129,9 @@ public class PlayerController : MonoBehaviour
 
     void Die(){
         this.enabled = false;
-        playerCapsule.enabled = false;
-        rb.gravityScale = 0;
+        rb.velocity = new Vector2(0f,0f);
+        rb.gravityScale = 1;
+        // playerCapsule.enabled = false;
         anim.Play("Die", -1);
         gameOver.SetActive(true);
     }
