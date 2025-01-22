@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private CapsuleCollider2D playerCapsule;
+    [SerializeField]
     private float moveX;
     public string levelName;
 
@@ -22,6 +23,14 @@ public class PlayerController : MonoBehaviour
     public GameObject gameOver;
     public GameObject canvasPause;
     public bool isPause;
+
+    private void Awake(){
+        //conferir se a cena foi carregada
+        if(PlayerPrefs.GetInt("wasLoaded")== 1 ){
+            life = PlayerPrefs.GetInt("Life", 0);
+            Debug.Log("Game Loaded");
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -37,23 +46,18 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         moveX = Input.GetAxisRaw("Horizontal");
-
-        if (Input.GetButtonDown("Jump") && addJumps > 0)
-        {
-            Jump();
-        }
-
         textLife.text = life.ToString();
 
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Attack();
+        if(life <= 0){
+            Die();
         }
 
-
-        if(life <= 0 ){
-            Die();
+        //salvar o jogo
+        if(Input.GetKeyDown(KeyCode.P)){
+            string activeScene = SceneManager.GetActiveScene().name;
+            PlayerPrefs.SetString("Nivel Salvo", activeScene);
+            PlayerPrefs.SetInt("Life", life);
+            Debug.Log("Jogo Salvo");
         }
 
         if(Input.GetButtonDown("Cancel"))
@@ -61,11 +65,28 @@ public class PlayerController : MonoBehaviour
             PauseScreen();
         }
 
+        if(isGrounded == true){
+            addJumps = 2;
+            if(Input.GetButtonDown("Jump")){
+                Jump();
+            }
+        }
+        else{
+            if(Input.GetButtonDown("Jump") && addJumps > 0){
+                addJumps--;
+                Jump();
+            }
+        }
+        Attack();
+
     }
 
     void FixedUpdate()
     {
         Move();
+        
+
+        
 
     }
 
@@ -83,7 +104,7 @@ public class PlayerController : MonoBehaviour
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
             anim.SetBool("IsRun", true);
         }
-        else
+        if(moveX == 0)
         {
             anim.SetBool("IsRun", false);
         }
@@ -93,20 +114,24 @@ public class PlayerController : MonoBehaviour
     {
 
         rb.velocity = new Vector2(rb.velocity.x, JumpForce);
-        addJumps--;
+        anim.SetBool("IsJump", true);
     }
 
     void Attack()
     {
+        if(Input.GetButtonDown("Fire1")){
         anim.Play("Attack", -1);
+
+        }
         
     }
 
 
     void Die(){
         this.enabled = false;
-        playerCapsule.enabled = false;
-        rb.gravityScale = 0;
+        rb.velocity = new Vector2(0f,0f);
+        rb.gravityScale = 1;
+        // playerCapsule.enabled = false;
         anim.Play("Die", -1);
         gameOver.SetActive(true);
     }
