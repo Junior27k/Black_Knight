@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+//using System.Numerics;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,18 +12,34 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider2D playerCapsule;
     [SerializeField]
     private float moveX;
-    public string levelName;
 
+    [Header("Atributtes")]
     public float speed;
     public int addJumps;
-    public bool isGrounded;
     public float JumpForce = 7;
     public int life;
+
+    [Header("Ground Detection")]
+    public LayerMask groundLayer; //camada que representa o chao
+    public float groundCheckDistance; //tamanho da linha do raycast
+    public Vector2 groundCheckOffsetLeft; //offset para ponto de verificacao a esquerda
+    public Vector2 groundCheckOffsetRight; //offset para ponto de verificacao a direita
+
+    [Header("Bool")]
+    [SerializeField] private bool isGrounded;
+    [HideInInspector]public bool isPause;
+
+
+    [Header("UI")]
     public TextMeshProUGUI textLife;
 
+    [Header("GameObjects")]
     public GameObject gameOver;
     public GameObject canvasPause;
-    public bool isPause;
+
+    [Header("GameObjects")]
+    public string levelName;
+    
 
     private void Awake(){
         //conferir se a cena foi carregada
@@ -65,8 +82,8 @@ public class PlayerController : MonoBehaviour
             PauseScreen();
         }
 
-        if(isGrounded == true){
-            addJumps = 2;
+        if(isGrounded){
+            addJumps = 1;
             if(Input.GetButtonDown("Jump")){
                 Jump();
             }
@@ -77,6 +94,7 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
         }
+
         Attack();
 
     }
@@ -85,7 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         
-
+        //CheckGroundedStatus();
         
 
     }
@@ -98,11 +116,17 @@ public class PlayerController : MonoBehaviour
         {
             transform.eulerAngles = new Vector3(0f, 0f, 0f);
             anim.SetBool("IsRun", true);
+
+            //groundCheckOffsetLeft.x = -Mathf.Abs(groundCheckOffsetLeft.x);
+           // groundCheckOffsetRight.x = Mathf.Abs(groundCheckOffsetRight.x);
         }
         else if (moveX < 0)
         {
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
             anim.SetBool("IsRun", true);
+
+            //groundCheckOffsetLeft.x = Mathf.Abs(groundCheckOffsetLeft.x);
+            //groundCheckOffsetRight.x = -Mathf.Abs(groundCheckOffsetRight.x);
         }
         if(moveX == 0)
         {
@@ -162,6 +186,32 @@ public class PlayerController : MonoBehaviour
     public void BackMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    void CheckGroundedStatus(){
+        //calcula os pontos da origem
+        Vector2 position = transform.position;
+        Vector2 groundCheckPositionLeft = position + groundCheckOffsetLeft;
+        Vector2 groundCheckPositionRight = position + groundCheckOffsetRight;
+
+        //lanca os raycasts
+        RaycastHit2D hitLeft = Physics2D.Raycast(groundCheckPositionLeft, Vector2.down, groundCheckDistance, groundLayer);
+        RaycastHit2D hitRight = Physics2D.Raycast(groundCheckPositionRight, Vector2.down, groundCheckDistance, groundLayer);
+
+        //Atualiza o valor de isGrounded
+        isGrounded = hitLeft.collider != null || hitRight.collider != null;
+
+        anim.SetBool("IsJump", !isGrounded);
+    }
+
+    void OnDrawGizmos(){
+        //desenha as linhas dos raycasts
+        Vector3 groundCheckPositionLeft = transform.position + new Vector3(groundCheckOffsetLeft.x, groundCheckOffsetLeft.y, 0f);
+        Vector3 groundCheckPositionRight = transform.position + new Vector3(groundCheckOffsetRight.x, groundCheckOffsetRight.y, 0f);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(groundCheckPositionLeft, groundCheckPositionLeft + Vector3.down * groundCheckDistance);
+        Gizmos.DrawLine(groundCheckPositionRight, groundCheckPositionRight + Vector3.down * groundCheckDistance);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
