@@ -5,6 +5,8 @@ using UnityEngine;
 public class KeeperAttack : MonoBehaviour
 {
 
+    //PlayerController player;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
