@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2561711127649434604}
   - component: {fileID: 3007727348072942781}
-  - component: {fileID: 2949487195571690192}
+  - component: {fileID: 7910369080589007472}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
@@ -68,7 +68,7 @@ CircleCollider2D:
   m_Offset: {x: -0.017930787, y: -0.17097962}
   serializedVersion: 2
   m_Radius: 0.16021386
---- !u!114 &2949487195571690192
+--- !u!114 &7910369080589007472
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 257761589400290151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72946650692694c4e9614a6fda37a533, type: 3}
+  m_Script: {fileID: 11500000, guid: 09639eeda603d704a9d8ed6530b1c111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3143954630830460717
@@ -170,7 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe4ee98fb94ce54cbc31fc6e32efc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmo: {fileID: 1329142362641404114}
 --- !u!1 &5562088685683268951
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,10 +327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69560c9d75e3dcd4c88dd56c96d6706f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 4
-  speed: 4
-  player: {fileID: 0}
-  range: {fileID: 8369176698151914368}
 --- !u!1 &8369176698151914368
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +369,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8369176698151914368}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdf04fe2fea2ba840876bb90887a9573, type: 3}
+  m_Script: {fileID: 11500000, guid: 62138b0c2b35d0a499ddf6b9bb0cf700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!58 &6613577492905581561
