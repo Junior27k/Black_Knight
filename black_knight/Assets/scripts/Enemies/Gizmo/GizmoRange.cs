@@ -5,14 +5,12 @@ using UnityEngine;
 public class GizmoRange : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        
-    }
+        if(collision.CompareTag("Player"))
+        {
+            GetComponentInParent<Animator>().Play("Attack", -1);
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
