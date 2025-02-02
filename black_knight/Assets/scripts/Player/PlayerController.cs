@@ -3,32 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-//using System.Numerics;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private Animator anim;
+    [SerializeField] private Animator anim;
     private CapsuleCollider2D playerCapsule;
-    [SerializeField]
-    private float moveX;
 
-    [Header("Atributtes")]
-    public float speed;
-    public int addJumps;
-    public float JumpForce = 7;
-    public int life;
+    [Header("Attributes")]
+    public float speed = 5f;
+    public int maxJumps = 2;
+    public float jumpForce = 7f;
+    public int life = 3;
 
     [Header("Ground Detection")]
-    public LayerMask groundLayer; //camada que representa o chao
-    public float groundCheckDistance; //tamanho da linha do raycast
-    public Vector2 groundCheckOffsetLeft; //offset para ponto de verificacao a esquerda
-    public Vector2 groundCheckOffsetRight; //offset para ponto de verificacao a direita
-
-    [Header("Bool")]
-    [SerializeField] private bool isGrounded;
-    [HideInInspector]public bool isPause;
-
+    public LayerMask groundLayer;
+    public float groundCheckDistance = 0.1f;
+    public Vector2 groundCheckOffsetLeft = new Vector2(-0.5f, -0.5f);
+    public Vector2 groundCheckOffsetRight = new Vector2(0.5f, -0.5f);
 
     [Header("UI")]
     public TextMeshProUGUI textLife;
@@ -37,175 +29,181 @@ public class PlayerController : MonoBehaviour
     public GameObject gameOver;
     public GameObject canvasPause;
 
-    [Header("GameObjects")]
+    [Header("Scene Management")]
     public string levelName;
-    
 
-    private void Awake(){
-        //conferir se a cena foi carregada
-        if(PlayerPrefs.GetInt("wasLoaded")== 1 ){
-            life = PlayerPrefs.GetInt("Life", 0);
+    private bool isGrounded;
+    private bool isPaused;
+    private int remainingJumps;
+
+    private void Awake()
+    {
+        if (PlayerPrefs.GetInt("wasLoaded") == 1)
+        {
+            life = PlayerPrefs.GetInt("Life", life);
             Debug.Log("Game Loaded");
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         playerCapsule = GetComponent<CapsuleCollider2D>();
-
+        remainingJumps = maxJumps;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        moveX = Input.GetAxisRaw("Horizontal");
-        textLife.text = life.ToString();
-
-        if(life <= 0){
-            Die();
-        }
-
-        //salvar o jogo
-        if(Input.GetKeyDown(KeyCode.P)){
-            string activeScene = SceneManager.GetActiveScene().name;
-            PlayerPrefs.SetString("Nivel Salvo", activeScene);
-            PlayerPrefs.SetInt("Life", life);
-            Debug.Log("Jogo Salvo");
-        }
-
-        if(Input.GetButtonDown("Cancel"))
-        {
-            PauseScreen();
-        }
-
-        if(isGrounded){
-            addJumps = 1;
-            if(Input.GetButtonDown("Jump")){
-                Jump();
-            }
-        }
-        else{
-            if(Input.GetButtonDown("Jump") && addJumps > 0){
-                addJumps--;
-                Jump();
-            }
-        }
-
-        Attack();
-
+        HandleInput();
+        UpdateUI();
+        CheckLife();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Move();
-        
-        //CheckGroundedStatus();
-        
-
+        CheckGroundedStatus();
     }
 
-
-    void Move()
+    private void HandleInput()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SaveGame();
+        }
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            TogglePause();
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            TryJump();
+        }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Attack();
+        }
+    }
+
+    private void UpdateUI()
+    {
+        textLife.text = life.ToString();
+    }
+
+    private void CheckLife()
+    {
+        if (life <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void SaveGame()
+    {
+        string activeScene = SceneManager.GetActiveScene().name;
+        PlayerPrefs.SetString("Nivel Salvo", activeScene);
+        PlayerPrefs.SetInt("Life", life);
+        Debug.Log("Jogo Salvo");
+    }
+
+    private void TogglePause()
+    {
+        isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0 : 1;
+        canvasPause.SetActive(isPaused);
+    }
+
+    private void Move()
+    {
+        float moveX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
-        if (moveX > 0)
-        {
-            transform.eulerAngles = new Vector3(0f, 0f, 0f);
-            anim.SetBool("IsRun", true);
 
-            //groundCheckOffsetLeft.x = -Mathf.Abs(groundCheckOffsetLeft.x);
-           // groundCheckOffsetRight.x = Mathf.Abs(groundCheckOffsetRight.x);
-        }
-        else if (moveX < 0)
+        if (moveX != 0)
         {
-            transform.eulerAngles = new Vector3(0f, 180f, 0f);
+            transform.eulerAngles = new Vector3(0f, moveX > 0 ? 0f : 180f, 0f);
             anim.SetBool("IsRun", true);
-
-            //groundCheckOffsetLeft.x = Mathf.Abs(groundCheckOffsetLeft.x);
-            //groundCheckOffsetRight.x = -Mathf.Abs(groundCheckOffsetRight.x);
         }
-        if(moveX == 0)
+        else
         {
             anim.SetBool("IsRun", false);
         }
     }
 
-    void Jump()
+    private void TryJump()
     {
+        if (isGrounded || remainingJumps > 0)
+        {
+            Jump();
+            if (!isGrounded)
+            {
+                remainingJumps--;
+            }
+        }
+    }
 
-        rb.velocity = new Vector2(rb.velocity.x, JumpForce);
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         anim.SetBool("IsJump", true);
     }
 
-    void Attack()
+    private void Attack()
     {
-        if(Input.GetButtonDown("Fire1")){
         anim.Play("Attack", -1);
-
-        }
-        
     }
 
-
-    void Die(){
+    private void Die()
+    {
         this.enabled = false;
-        rb.velocity = new Vector2(0f,0f);
+        rb.velocity = Vector2.zero;
         rb.gravityScale = 1;
-        // playerCapsule.enabled = false;
         anim.Play("Die", -1);
         gameOver.SetActive(true);
     }
 
-    void PauseScreen()
+    private void CheckGroundedStatus()
     {
-        if(isPause)
-        {
-            isPause = false;
-            Time.timeScale = 1;
-            canvasPause.SetActive(false);
-        }
-        else
-        {
-            isPause = true;
-            Time.timeScale = 0;
-            canvasPause.SetActive(true);
-        }
-    }
-
-    public void ResumeGame()
-    {
-        isPause = false;
-        Time.timeScale = 1;
-        canvasPause.SetActive(false);
-    }
-
-    public void BackMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
-
-    void CheckGroundedStatus(){
-        //calcula os pontos da origem
         Vector2 position = transform.position;
         Vector2 groundCheckPositionLeft = position + groundCheckOffsetLeft;
         Vector2 groundCheckPositionRight = position + groundCheckOffsetRight;
 
-        //lanca os raycasts
         RaycastHit2D hitLeft = Physics2D.Raycast(groundCheckPositionLeft, Vector2.down, groundCheckDistance, groundLayer);
         RaycastHit2D hitRight = Physics2D.Raycast(groundCheckPositionRight, Vector2.down, groundCheckDistance, groundLayer);
 
-        //Atualiza o valor de isGrounded
         isGrounded = hitLeft.collider != null || hitRight.collider != null;
-
         anim.SetBool("IsJump", !isGrounded);
+
+        if (isGrounded)
+        {
+            remainingJumps = maxJumps;
+        }
     }
 
-    void OnDrawGizmos(){
-        //desenha as linhas dos raycasts
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            anim.SetBool("IsJump", false);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+            anim.SetBool("IsJump", true);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
         Vector3 groundCheckPositionLeft = transform.position + new Vector3(groundCheckOffsetLeft.x, groundCheckOffsetLeft.y, 0f);
         Vector3 groundCheckPositionRight = transform.position + new Vector3(groundCheckOffsetRight.x, groundCheckOffsetRight.y, 0f);
 
@@ -214,22 +212,15 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawLine(groundCheckPositionRight, groundCheckPositionRight + Vector3.down * groundCheckDistance);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    public void ResumeGame()
     {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGrounded = true;
-            addJumps = 2;
-            anim.SetBool("IsJump", false);
-        }
+        isPaused = false;
+        Time.timeScale = 1;
+        canvasPause.SetActive(false);
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    public void BackMenu()
     {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGrounded = false;
-            anim.SetBool("IsJump", true);
-        }
+        SceneManager.LoadScene(0);
     }
 }
