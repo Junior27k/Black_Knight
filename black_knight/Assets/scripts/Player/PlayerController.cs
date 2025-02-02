@@ -160,8 +160,9 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         this.enabled = false;
-        rb.velocity = Vector2.zero;
+        rb.velocity = new Vector2(0f,0f);
         rb.gravityScale = 1;
+        // playerCapsule.enabled = false;
         anim.Play("Die", -1);
         gameOver.SetActive(true);
     }
