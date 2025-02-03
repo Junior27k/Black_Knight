@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         if (life <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
     }
 
@@ -157,14 +157,24 @@ public class PlayerController : MonoBehaviour
         anim.Play("Attack", -1);
     }
 
-    private void Die()
+    private IEnumerator Die()
     {
+        // Desativa o controle do player
         this.enabled = false;
-        rb.velocity = new Vector2(0f,0f);
+        rb.velocity = new Vector2(0f, 0f);
         rb.gravityScale = 1;
-        // playerCapsule.enabled = false;
+
+        // Reproduz a animação de morte
         anim.Play("Die", -1);
+
+        // Espera a animação de morte terminar (ajuste o tempo conforme necessário)
+        yield return new WaitForSeconds(2f); // Tempo estimado da animação
+
+        // Exibe a tela de Game Over
         gameOver.SetActive(true);
+
+        // Pausa o jogo (opcional)
+        Time.timeScale = 0;
     }
 
     private void CheckGroundedStatus()
@@ -222,6 +232,6 @@ public class PlayerController : MonoBehaviour
 
     public void BackMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
