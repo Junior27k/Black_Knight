@@ -232,6 +232,6 @@ public class PlayerController : MonoBehaviour
 
     public void BackMenu()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 }

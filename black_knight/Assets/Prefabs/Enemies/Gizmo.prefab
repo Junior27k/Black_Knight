@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 5153425720207629951}
   - component: {fileID: 2680351718979686357}
   m_Layer: 0
-  m_Name: Skin
+  m_Name: Gizmo
   m_TagString: Gizmo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -706,8 +706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69560c9d75e3dcd4c88dd56c96d6706f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 10
-  maxHealth: 10
+  life: 4
+  maxHealth: 5
   speed: 2
   player: {fileID: 1329142362641404114}
   range: {fileID: 8369176698151914368}
