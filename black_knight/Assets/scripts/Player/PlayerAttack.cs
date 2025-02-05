@@ -14,7 +14,7 @@ public class PlayerAttack : MonoBehaviour
         }
         if(collision.CompareTag("Gizmo"))
         {
-            collision.GetComponent<GizmoController>().life--;
+            collision.GetComponent<GizmoHealth>().TakeDamage();
         }
     }
 }

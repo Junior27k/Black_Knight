@@ -31,10 +31,10 @@ RectTransform:
   - {fileID: 5413595608750210037}
   m_Father: {fileID: 5105541517165095641}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 28.57141}
+  m_SizeDelta: {x: 0, y: 28.57141}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &257761589400290151
 GameObject:
@@ -148,10 +148,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5105541517165095641}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2144277477754299656
 CanvasRenderer:
@@ -224,10 +224,10 @@ RectTransform:
   - {fileID: 1237711686814467984}
   m_Father: {fileID: 1426028341828881399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.00002193451}
-  m_SizeDelta: {x: 0, y: 28.57141}
+  m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6625290807081534669
 MonoBehaviour:
@@ -317,7 +317,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0.048800007}
-  m_SizeDelta: {x: 200, y: 28.57141}
+  m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &104327021822324722
 Canvas:
@@ -417,7 +417,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6621861886876305491
 CanvasRenderer:
@@ -560,7 +560,8 @@ GameObject:
   - component: {fileID: 306854203907632127}
   - component: {fileID: 5706211158336318820}
   - component: {fileID: 5153425720207629951}
-  - component: {fileID: 2680351718979686357}
+  - component: {fileID: 8287812729052514638}
+  - component: {fileID: 6528967660921335181}
   m_Layer: 0
   m_Name: Gizmo
   m_TagString: Gizmo
@@ -694,7 +695,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2680351718979686357
+--- !u!114 &8287812729052514638
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -706,11 +707,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69560c9d75e3dcd4c88dd56c96d6706f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 4
-  maxHealth: 5
   speed: 2
-  player: {fileID: 1329142362641404114}
-  range: {fileID: 8369176698151914368}
+  player: {fileID: 3031276803186291223, guid: e0cd9b07019d0bf4fb4c8be639dc2120, type: 3}
+--- !u!114 &6528967660921335181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562088685683268951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff70ceaaf7e93574db376576abe08a42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 7
+  maxHealth: 7
   healthSlider: {fileID: 6625290807081534669}
 --- !u!1 &8369176698151914368
 GameObject:

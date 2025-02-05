@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class GizmoKitten : MonoBehaviour
 {
-
     public Transform gizmo;
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            gizmo.GetComponent<GizmoController>().enabled= true;
+            gizmo.GetComponent<GizmoController>().enabled = true;
+            gizmo.GetComponent<GizmoHealth>().enabled = true;
             gizmo.GetComponent<Animator>().SetBool("IsRun", true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            gizmo.GetComponent<GizmoController>().enabled= false;
+            gizmo.GetComponent<GizmoController>().enabled = false;
+            gizmo.GetComponent<GizmoHealth>().enabled = false;
             gizmo.GetComponent<Animator>().SetBool("IsRun", false);
         }
     }

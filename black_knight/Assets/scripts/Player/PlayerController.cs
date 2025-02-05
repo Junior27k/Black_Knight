@@ -1,14 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private Animator anim;
-    private BoxCollider2D playerColider;
+    private CapsuleCollider2D playerColider;
 
     [Header("Attributes")]
     public float speed = 5f;
@@ -22,42 +19,25 @@ public class PlayerController : MonoBehaviour
     public Vector2 groundCheckOffsetLeft = new Vector2(-0.5f, -0.5f);
     public Vector2 groundCheckOffsetRight = new Vector2(0.5f, -0.5f);
 
-    [Header("UI")]
-    public TextMeshProUGUI textLife;
-
     [Header("GameObjects")]
     public GameObject gameOver;
     public GameObject canvasPause;
 
-    [Header("Scene Management")]
-    public string levelName;
-
     private bool isGrounded;
-    private bool isPaused;
     private int remainingJumps;
-
-    private void Awake()
-    {
-        if (PlayerPrefs.GetInt("wasLoaded") == 1)
-        {
-            life = PlayerPrefs.GetInt("Life", life);
-            Debug.Log("Game Loaded");
-        }
-    }
 
     private void Start()
     {
-        Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
-        playerColider = GetComponent<BoxCollider2D>();
+        playerColider = GetComponent<CapsuleCollider2D>();
         remainingJumps = maxJumps;
+        GameManager.Instance.UpdateLifeUI(life);
     }
 
     private void Update()
     {
         HandleInput();
-        UpdateUI();
         CheckLife();
     }
 
@@ -71,12 +51,12 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            SaveGame();
+            GameManager.Instance.SaveGame(life);
         }
 
         if (Input.GetButtonDown("Cancel"))
         {
-            TogglePause();
+            GameManager.Instance.TogglePause();
         }
 
         if (Input.GetButtonDown("Jump"))
@@ -90,32 +70,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void UpdateUI()
-    {
-        textLife.text = life.ToString();
-    }
-
     private void CheckLife()
     {
         if (life <= 0)
         {
             StartCoroutine(Die());
         }
-    }
-
-    private void SaveGame()
-    {
-        string activeScene = SceneManager.GetActiveScene().name;
-        PlayerPrefs.SetString("Nivel Salvo", activeScene);
-        PlayerPrefs.SetInt("Life", life);
-        Debug.Log("Jogo Salvo");
-    }
-
-    private void TogglePause()
-    {
-        isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0 : 1;
-        canvasPause.SetActive(isPaused);
     }
 
     private void Move()
@@ -157,24 +117,27 @@ public class PlayerController : MonoBehaviour
         anim.Play("Attack", -1);
     }
 
+    public void TakeDamage(int damage)
+    {
+        life -= damage;
+        GameManager.Instance.UpdateLifeUI(life);
+
+        // Aciona a animação de hit
+        anim.SetTrigger("Hit");
+
+        if (life <= 0)
+        {
+            StartCoroutine(Die());
+        }
+    }
+
     private IEnumerator Die()
     {
-        // Desativa o controle do player
         this.enabled = false;
-        rb.velocity = new Vector2(0f, 0f);
-        rb.gravityScale = 1;
-
-        // Reproduz a animação de morte
+        rb.velocity = Vector2.zero;
         anim.Play("Die", -1);
-
-        // Espera a animação de morte terminar (ajuste o tempo conforme necessário)
-        yield return new WaitForSeconds(2f); // Tempo estimado da animação
-
-        // Exibe a tela de Game Over
-        gameOver.SetActive(true);
-
-        // Pausa o jogo (opcional)
-        Time.timeScale = 0;
+        yield return new WaitForSeconds(2f);
+        GameManager.Instance.RespawnPlayer(this);
     }
 
     private void CheckGroundedStatus()
@@ -195,24 +158,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-            anim.SetBool("IsJump", false);
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-            anim.SetBool("IsJump", true);
-        }
-    }
-
     private void OnDrawGizmos()
     {
         Vector3 groundCheckPositionLeft = transform.position + new Vector3(groundCheckOffsetLeft.x, groundCheckOffsetLeft.y, 0f);
@@ -221,17 +166,5 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawLine(groundCheckPositionLeft, groundCheckPositionLeft + Vector3.down * groundCheckDistance);
         Gizmos.DrawLine(groundCheckPositionRight, groundCheckPositionRight + Vector3.down * groundCheckDistance);
-    }
-
-    public void ResumeGame()
-    {
-        isPaused = false;
-        Time.timeScale = 1;
-        canvasPause.SetActive(false);
-    }
-
-    public void BackMenu()
-    {
-        SceneManager.LoadScene(1);
     }
 }
