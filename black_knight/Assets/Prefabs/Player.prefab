@@ -224,8 +224,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  groundCheckDistance: 1.3
-  groundCheckOffsetLeft: {x: 0, y: 0}
+  groundCheckDistance: 1.5
+  groundCheckOffsetLeft: {x: -0.5, y: 0}
   groundCheckOffsetRight: {x: 0, y: 0}
   textLife: {fileID: 0}
   gameOver: {fileID: 0}

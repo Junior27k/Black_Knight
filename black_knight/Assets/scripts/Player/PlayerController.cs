@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private Animator anim;
-    private CapsuleCollider2D playerCapsule;
+    private BoxCollider2D playerColider;
 
     [Header("Attributes")]
     public float speed = 5f;
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Ground Detection")]
     public LayerMask groundLayer;
-    public float groundCheckDistance = 0.1f;
+    public float groundCheckDistance = 0.15f;
     public Vector2 groundCheckOffsetLeft = new Vector2(-0.5f, -0.5f);
     public Vector2 groundCheckOffsetRight = new Vector2(0.5f, -0.5f);
 
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
-        playerCapsule = GetComponent<CapsuleCollider2D>();
+        playerColider = GetComponent<BoxCollider2D>();
         remainingJumps = maxJumps;
     }
 
