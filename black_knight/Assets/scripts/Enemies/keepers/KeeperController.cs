@@ -24,10 +24,10 @@ public class KeeperController : MonoBehaviour
 
      void Die(){
         this.enabled = false;
+        anim.Play("Die", -1);
         range.SetActive(false);
         colliderKeeper.enabled = false;
         range.SetActive(false);
-        anim.Play("Die", -1);
     }
 
     // Update is called once per frame
@@ -62,6 +62,7 @@ public class KeeperController : MonoBehaviour
         }
 
         if(life <= 0){
+            life = 0;
             Die();
         }
 
