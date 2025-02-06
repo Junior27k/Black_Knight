@@ -1,52 +1,125 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GizmoController : MonoBehaviour
 {
-    public float speed = 2;
-    public Transform player;
+    [Header("Movement Settings")]
+    public float speed = 2f;
+    public bool returnsToInitialPos = true; // Voltar para posição inicial quando o player sair?
+    public float returnDelay = 2f; // Tempo antes de voltar
+    private Vector3 initialPosition; // Posição inicial do Gizmo
+
+    [Header("Attack Settings")]
+    public int attackDamage = 1;
+    public float attackCooldown = 1.5f;
+
+    [Header("Range Settings")]
+    public Transform rangeObject; // OBRIGATÓRIO: Define o range de ataque
+
+    private Transform player;
     private Animator anim;
-    private float sideSign;
-    private string side;
+    private bool isAttacking = false;
+    private bool playerInRange = false;
+    private bool isChasing = false;
 
     void Start()
     {
         anim = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        initialPosition = transform.position; // Salva a posição inicial
     }
 
     void Update()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        if (isAttacking) return; // Evita movimento durante o ataque
+
+        if (playerInRange)
         {
-            return; // Não se move enquanto ataca
+            StartCoroutine(Attack());
         }
-
-        // Determina a direção do player
-        sideSign = Mathf.Sign(transform.position.x - player.position.x);
-
-        if (Mathf.Abs(sideSign) == 1.0f)
+        else if (isChasing)
         {
-            side = sideSign == 1.0f ? "right" : "left";
+            ChasePlayer();
         }
+    }
 
-        // Rotaciona o Gizmo para frente do player
-        switch (side)
+    // 🔥 Ativado pelo GizmoKitten quando o player entra na zona
+    public void StartChasing()
+    {
+        isChasing = true;
+        anim.SetBool("IsRun", true);
+    }
+
+    // 🔥 Chamado quando o player sai da zona
+    public void StopChasing()
+    {
+        isChasing = false;
+        anim.SetBool("IsRun", false);
+
+        if (returnsToInitialPos)
         {
-            case "right":
-                transform.eulerAngles = new Vector3(0f, 180f, 0f);
-                break;
-
-            case "left":
-                transform.eulerAngles = new Vector3(0f, 0f, 0f);
-                break;
+            StartCoroutine(ReturnToStart());
         }
+    }
 
-        // Move-se em direção ao player
-        if (Vector2.Distance(transform.position, player.position) > 0.5f)
+    private void ChasePlayer()
+    {
+        float distance = Vector2.Distance(transform.position, player.position);
+
+        // Vira para o player
+        transform.localScale = new Vector3(player.position.x < transform.position.x ? 1 : -1, 1, 1);
+
+        // Move apenas se o player estiver fora do range
+        if (distance > 0.5f)
         {
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.position.x, transform.position.y), speed * Time.deltaTime);
         }
     }
+
+    private IEnumerator Attack()
+    {
+        if (isAttacking) yield break;
+
+        isAttacking = true;
+        anim.SetTrigger("Hit"); // Inicia a animação de ataque
+        DealDamage();
+        yield return new WaitForSeconds(attackCooldown);
+        isAttacking = false;
+    }
+
+    // 🔥 Chamado pelo Animation Event no frame exato do golpe
+    public void DealDamage()
+    {
+        if (playerInRange)
+        {
+            player.GetComponent<PlayerController>().TakeDamage(attackDamage);
+        }
+    }
+
+    private IEnumerator ReturnToStart()
+    {
+        yield return new WaitForSeconds(returnDelay); // Espera o tempo antes de voltar
+
+        // Determina a direção para virar corretamente
+        float dir = initialPosition.x < transform.position.x ? -1 : 1;
+        transform.localScale = new Vector3(dir, 1, 1);
+
+        while (Vector2.Distance(transform.position, initialPosition) > 0.1f)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, initialPosition, speed * Time.deltaTime);
+            anim.SetBool("IsRun", true);
+            yield return null;
+        }
+
+        transform.position = initialPosition;
+        anim.SetBool("IsRun", false);
+    }
+
+    // 🔥 Chamado pelo Range Trigger
+    public void SetPlayerInRange(bool isInRange)
+    {
+        playerInRange = isInRange;
+    }
+
 
 }

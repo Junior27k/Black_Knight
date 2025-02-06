@@ -7,6 +7,7 @@ public class GizmoHealth : MonoBehaviour
 {
     public int life, maxHealth = 7;
     public Slider healthSlider;
+    private bool isDead = false;
 
     void Start()
     {
@@ -34,12 +35,18 @@ public class GizmoHealth : MonoBehaviour
         }
     }
 
+    public bool IsDead(){
+        return isDead;
+    }
+
     void Die()
     {
-        this.enabled = false;
-        healthSlider.enabled = false;
+        isDead = true;
         GetComponent<CapsuleCollider2D>().enabled = false;
+        GetComponent<GizmoController>().enabled = false;
         GetComponent<Animator>().Play("Die", -1);
+        healthSlider.enabled = false;
+        this.enabled = false;
     }
 
     public void TakeDamage(int damage = 1){

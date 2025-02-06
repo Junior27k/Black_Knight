@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GizmoKitten : MonoBehaviour
@@ -10,9 +8,7 @@ public class GizmoKitten : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            gizmo.GetComponent<GizmoController>().enabled = true;
-            gizmo.GetComponent<GizmoHealth>().enabled = true;
-            gizmo.GetComponent<Animator>().SetBool("IsRun", true);
+            gizmo.GetComponent<GizmoController>().StartChasing();
         }
     }
 
@@ -20,9 +16,7 @@ public class GizmoKitten : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            gizmo.GetComponent<GizmoController>().enabled = false;
-            gizmo.GetComponent<GizmoHealth>().enabled = false;
-            gizmo.GetComponent<Animator>().SetBool("IsRun", false);
+            gizmo.GetComponent<GizmoController>().StopChasing();
         }
     }
 }
