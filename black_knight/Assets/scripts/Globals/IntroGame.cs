@@ -24,6 +24,6 @@ public class IntroGame : MonoBehaviour
             imagemAtual++;
         }
         // Exemplo 2: Carregar próxima cena
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }

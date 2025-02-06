@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
     {
         //LoadGame.Instance.wasLoaded = false;
         //PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     public void ExitGame()

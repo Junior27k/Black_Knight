@@ -35,6 +35,16 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         LoadGame();
     }
+    
+    public void NextLevel()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadSceneAsync(sceneName);
+    }
 
     public void UpdateLifeUI(int life)
     {

@@ -15,6 +15,6 @@ public class GameOver : MonoBehaviour
 
     public void BackMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
