@@ -127,11 +127,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3031276803186291223, guid: e0cd9b07019d0bf4fb4c8be639dc2120, type: 3}
   m_PrefabInstance: {fileID: 8144884514886399755}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &149474699 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8140977446991740353, guid: e0cd9b07019d0bf4fb4c8be639dc2120, type: 3}
-  m_PrefabInstance: {fileID: 8144884514886399755}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &308750039
 GameObject:
   m_ObjectHideFlags: 0
@@ -19435,6 +19430,34 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7633432117580966700, guid: da7eee4573011ba40ac27d54fe5c14ec, type: 3}
+      propertyPath: MinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633432117580966700, guid: da7eee4573011ba40ac27d54fe5c14ec, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633432117580966700, guid: da7eee4573011ba40ac27d54fe5c14ec, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633432117580966700, guid: da7eee4573011ba40ac27d54fe5c14ec, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802991413686435672, guid: da7eee4573011ba40ac27d54fe5c14ec, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107772786502674956, guid: da7eee4573011ba40ac27d54fe5c14ec, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107772786502674956, guid: da7eee4573011ba40ac27d54fe5c14ec, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8287812729052514638, guid: da7eee4573011ba40ac27d54fe5c14ec, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -19443,8 +19466,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gizmo
       objectReference: {fileID: 0}
+    - target: {fileID: 8585045296080889874, guid: da7eee4573011ba40ac27d54fe5c14ec, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7153084124501074401, guid: da7eee4573011ba40ac27d54fe5c14ec, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da7eee4573011ba40ac27d54fe5c14ec, type: 3}
@@ -19769,7 +19797,7 @@ PrefabInstance:
     - target: {fileID: 4333365238940835901, guid: e0cd9b07019d0bf4fb4c8be639dc2120, type: 3}
       propertyPath: anim
       value: 
-      objectReference: {fileID: 149474699}
+      objectReference: {fileID: 0}
     - target: {fileID: 4333365238940835901, guid: e0cd9b07019d0bf4fb4c8be639dc2120, type: 3}
       propertyPath: life
       value: 5
@@ -19784,7 +19812,7 @@ PrefabInstance:
       objectReference: {fileID: 1513760031}
     - target: {fileID: 4333365238940835901, guid: e0cd9b07019d0bf4fb4c8be639dc2120, type: 3}
       propertyPath: maxJumps
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4333365238940835901, guid: e0cd9b07019d0bf4fb4c8be639dc2120, type: 3}
       propertyPath: textLife

@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private Animator anim;
-    private CapsuleCollider2D playerColider;
+    private CapsuleCollider2D playerCollider;
 
     [Header("Attributes")]
     public float speed = 5f;
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
-        playerColider = GetComponent<CapsuleCollider2D>();
+        playerCollider = GetComponent<CapsuleCollider2D>();
         remainingJumps = maxJumps;
         GameManager.Instance.UpdateLifeUI(life);
     }
@@ -59,14 +59,28 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.TogglePause();
         }
 
+        if (Input.GetKeyDown(KeyCode.X)) // Ataque normal
+        {
+            Attack("Attack");
+            
+        }
         if (Input.GetButtonDown("Jump"))
         {
             TryJump();
         }
-
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown(KeyCode.Z)) // Ataque especial
         {
-            Attack();
+            anim.SetTrigger("Attack2");
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow)) // Agachar
+        {
+            Crouch(true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.DownArrow)) // Levantar
+        {
+            Crouch(false);
         }
     }
 
@@ -94,6 +108,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Crouch(bool isCrouching)
+    {
+        anim.SetBool("IsCrouch", isCrouching);
+
+        if (isCrouching)
+        {
+            Vector2 currentOffset = playerCollider.offset;
+            currentOffset.y = -0.1160694f;
+            playerCollider.offset = currentOffset;
+            playerCollider.size = new Vector2(0.2f,0.281542f);
+            speed *= 0.5f; // Diminui a velocidade ao abaixar
+        }
+        else
+        {
+            Vector2 currentOffset = playerCollider.offset;
+            currentOffset.y = -0.06201427f;
+            playerCollider.offset = currentOffset;
+            playerCollider.size = new Vector2(0.2f,0.3896523f);
+            playerCollider.enabled = true;
+            speed *= 2f; // Retorna à velocidade normal ao levantar
+        }
+    }
+
     private void TryJump()
     {
         if (isGrounded || remainingJumps > 0)
@@ -110,11 +147,13 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         anim.SetBool("IsJump", true);
+        GetComponent<SoundPlayer>().PlaySound("Jump");
     }
 
-    private void Attack()
+    private void Attack(string type = "Attack")
     {
-        anim.Play("Attack", -1);
+        anim.Play(type, -1);
+        GetComponent<SoundPlayer>().PlaySound(type);
     }
 
     public void TakeDamage(int damage)
@@ -123,7 +162,7 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.UpdateLifeUI(life);
 
         // Aciona a animação de hit
-        anim.SetTrigger("Hit");
+        anim.Play("Hit", -1);
 
         if (life <= 0)
         {

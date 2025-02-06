@@ -7,7 +7,7 @@ public class PlayerAttack : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         if(collision.CompareTag("Keeper"))
         {
             collision.GetComponent<KeeperController>().life--;
@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
         {
             collision.GetComponent<GizmoHealth>().TakeDamage();
         }
+
     }
 }
  
