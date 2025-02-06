@@ -70,22 +70,23 @@ public class GameManager : MonoBehaviour
 
     public void RespawnPlayer(PlayerController player)
     {
-        if (hasCheckpoint)
-        {
-            if(checkpointTimes-- <= 0){
-                hasCheckpoint = false;
-            }
-            player.transform.position = lastCheckpointPosition;
-            player.life = 3; // Opcional: Restaurar vida ao reviver
-            UpdateLifeUI(player.life);
-            this.enabled = true;
-            player.gameObject.SetActive(true);
-            Debug.Log("Jogador renasceu no checkpoint!");
-        }
-        else
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+        // if (hasCheckpoint)
+        // {
+        //     if(checkpointTimes-- <= 0){
+        //         hasCheckpoint = false;
+        //     }
+        //     player.transform.position = lastCheckpointPosition;
+        //     player.life = 3; // Opcional: Restaurar vida ao reviver
+        //     UpdateLifeUI(player.life);
+        //     this.enabled = true;
+        //     player.gameObject.SetActive(true);
+        //     Debug.Log("Jogador renasceu no checkpoint!");
+        // }
+        // else
+        // {
+        //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 

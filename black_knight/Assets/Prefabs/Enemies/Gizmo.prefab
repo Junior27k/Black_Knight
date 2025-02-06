@@ -353,7 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  returnsToInitialPos: 1
+  returnsToInitialPos: 0
   returnDelay: 2
   attackDamage: 1
   attackCooldown: 1.5
