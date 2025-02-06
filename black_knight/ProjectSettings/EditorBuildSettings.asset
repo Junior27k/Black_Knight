@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 158d4011a654f7b44bd9ea0bd14ff7c9
   - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: c230f14db5259de49ab4a3dc35e7b26a
+  - enabled: 1
     path: Assets/Scenes/Start.unity
     guid: 0b1f234f7fc55924c9a3e3e178fb4b90
   - enabled: 1
@@ -20,7 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MAP3.unity
     guid: d5f4e83bcdce72e45a65a430da91fba4
-  - enabled: 1
-    path: Assets/Scenes/Intro.unity
-    guid: c230f14db5259de49ab4a3dc35e7b26a
   m_configObjects: {}

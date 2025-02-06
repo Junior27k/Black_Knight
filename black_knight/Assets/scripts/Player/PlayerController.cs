@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Z)) // Ataque especial
         {
-            anim.SetTrigger("Attack2");
+            Attack("Attack2");
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow)) // Agachar
