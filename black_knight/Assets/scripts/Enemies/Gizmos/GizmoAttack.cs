@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class GizmoAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerController>().life--;
+            collision.GetComponent<PlayerController>().TakeDamage(1); // Causa dano ao player
         }
     }
 }
