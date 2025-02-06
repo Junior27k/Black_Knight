@@ -56,7 +56,7 @@ public class GizmoController : MonoBehaviour
         isChasing = false;
         anim.SetBool("IsRun", false);
 
-        if (returnsToInitialPos)
+        if ( returnsToInitialPos)
         {
             StartCoroutine(ReturnToStart());
         }
@@ -67,7 +67,7 @@ public class GizmoController : MonoBehaviour
         float distance = Vector2.Distance(transform.position, player.position);
 
         // Vira para o player
-        transform.localScale = new Vector3(player.position.x < transform.position.x ? 1 : -1, 1, 1);
+        transform.eulerAngles = new Vector3(0f, player.position.x > transform.position.x ? 0f : -180f, 0f);
 
         // Move apenas se o player estiver fora do range
         if (distance > 0.5f)
@@ -81,8 +81,7 @@ public class GizmoController : MonoBehaviour
         if (isAttacking) yield break;
 
         isAttacking = true;
-        anim.SetTrigger("Hit"); // Inicia a animação de ataque
-        DealDamage();
+        anim.Play("Attack",-1); // Inicia a animação de ataque
         yield return new WaitForSeconds(attackCooldown);
         isAttacking = false;
     }

@@ -44,6 +44,7 @@ public class GizmoHealth : MonoBehaviour
         isDead = true;
         GetComponent<CapsuleCollider2D>().enabled = false;
         GetComponent<GizmoController>().enabled = false;
+        GetComponent<GizmoController>().returnsToInitialPos = false;
         GetComponent<Animator>().Play("Die", -1);
         healthSlider.enabled = false;
         this.enabled = false;
