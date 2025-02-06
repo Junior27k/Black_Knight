@@ -12,7 +12,7 @@ public class GizmoHealth : MonoBehaviour
     void Start()
     {
         life = maxHealth;
-        healthSlider.gameObject.SetActive(false);
+        healthSlider.gameObject.SetActive(true);
     }
 
     void Update()
@@ -31,7 +31,7 @@ public class GizmoHealth : MonoBehaviour
         healthSlider.value = healthPercent;
         if (life <= 0)
         {
-            healthSlider.gameObject.SetActive(false);
+            healthSlider.value = 0f;
         }
     }
 
@@ -46,6 +46,7 @@ public class GizmoHealth : MonoBehaviour
         GetComponent<GizmoController>().enabled = false;
         GetComponent<GizmoController>().returnsToInitialPos = false;
         GetComponent<Animator>().Play("Die", -1);
+         healthSlider.gameObject.SetActive(false);
         healthSlider.enabled = false;
         this.enabled = false;
     }

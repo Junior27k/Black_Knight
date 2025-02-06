@@ -12,6 +12,7 @@ public class GizmoController : MonoBehaviour
     [Header("Attack Settings")]
     public int attackDamage = 1;
     public float attackCooldown = 1.5f;
+    public AudioClip attackSound; // Som do ataque
 
     [Header("Range Settings")]
     public Transform rangeObject; // OBRIGATÓRIO: Define o range de ataque
@@ -21,10 +22,13 @@ public class GizmoController : MonoBehaviour
     private bool isAttacking = false;
     private bool playerInRange = false;
     private bool isChasing = false;
+    private AudioSource audioSource;
+
 
     void Start()
     {
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         initialPosition = transform.position; // Salva a posição inicial
     }
@@ -82,6 +86,12 @@ public class GizmoController : MonoBehaviour
 
         isAttacking = true;
         anim.Play("Attack",-1); // Inicia a animação de ataque
+
+        if (attackSound != null)
+        {
+            audioSource.PlayOneShot(attackSound);
+        }
+
         yield return new WaitForSeconds(attackCooldown);
         isAttacking = false;
     }
