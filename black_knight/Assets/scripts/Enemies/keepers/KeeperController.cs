@@ -1,70 +1,109 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KeeperController : MonoBehaviour
 {
-    private CapsuleCollider2D colliderKeeper;
-    private Animator anim;
-    private bool goRight;
+    [Header("Patrol Settings")]
+    public Transform pointB;
+    public Transform pointA;
+    public float patrolSpeed = 2f;
 
-    public int life;
-    public float speed;
- 
-    public Transform a;
-    public Transform b;
-    public GameObject range;
+    [Header("Attack Settings")]
+    public float visionRange = 5f;
+    public float attackRange = 1.5f;
+    public Transform player;
+    public float chaseSpeed = 3.5f;
 
-    // Start is called before the first frame update
+    private bool movingToPointB = true;
+    private Rigidbody2D rb;
+    private Animator animator;
+    private KeeperAttack keeperAttack; // Referência ao script de ataque
+
     void Start()
     {
-        colliderKeeper = GetComponent<CapsuleCollider2D>();
-        anim = GetComponent<Animator>();
+        // rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        keeperAttack = GetComponent<KeeperAttack>(); // Obtém o componente KeeperAttack
     }
 
-     void Die(){
-        this.enabled = false;
-        anim.Play("Die", -1);
-        range.SetActive(false);
-        colliderKeeper.enabled = false;
-        range.SetActive(false);
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        float playerDistance = Vector2.Distance(transform.position, player.position);
+
+        if (playerDistance <= attackRange)
         {
-            return;
+            Attack();
+            Debug.Log("Atacou o Player");
         }
-
-
-        if (goRight == true)
+        else if (playerDistance <= visionRange)
         {
-            if (Vector2.Distance(transform.position, b.position) < 0.1f)
-            {
-                goRight = false;
-            }
-            transform.eulerAngles = new Vector3(0f, 0f, 0f);
-            transform.position = Vector2.MoveTowards(transform.position, b.position, speed * Time.deltaTime);
-
+            ChasePlayer();
+            Debug.Log("Persseguir o Player");
         }
         else
         {
+            Patrol();
+        }
+    }
 
-            if (Vector2.Distance(transform.position, a.position) < 0.1f)
+    void Patrol()
+    {
+        animator.SetBool("Walking", true);
+
+        if (movingToPointB)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, pointB.position, patrolSpeed * Time.deltaTime);
+
+            if (Vector2.Distance(transform.position, pointB.position) < 0.2f)
             {
-                goRight = true;
+                Flip();
+                movingToPointB = false;
             }
-            transform.eulerAngles = new Vector3(0f, 180f, 0f);
-            transform.position = Vector2.MoveTowards(transform.position, a.position, speed * Time.deltaTime);
-
         }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, pointA.position, patrolSpeed * Time.deltaTime);
 
-        if(life <= 0){
-            life = 0;
-            Die();
+            if (Vector2.Distance(transform.position, pointA.position) < 0.2f)
+            {
+                Flip();
+                movingToPointB = true;
+            }
         }
+    }
 
+    void ChasePlayer()
+    {
+        animator.SetBool("Walking", true);
+        transform.position = Vector2.MoveTowards(transform.position, player.position, chaseSpeed * Time.deltaTime);
+
+        if ((player.position.x > transform.position.x && transform.localScale.x < 0) ||
+            (player.position.x < transform.position.x && transform.localScale.x > 0))
+        {
+            Flip();
+        }
+    }
+
+    void Attack()
+    {
+        // Chama o método de ataque do KeeperAttack
+        keeperAttack.PerformAttack();
+    }
+
+    void Flip()
+    {
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // Cor azul para o range de caça
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, visionRange);
+
+        // Cor vermelha para o range de ataque
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

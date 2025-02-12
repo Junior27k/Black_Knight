@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
 
         if(collision.CompareTag("Keeper"))
         {
-            collision.GetComponent<KeeperController>().life--;
+            collision.GetComponent<EnemyHealth>().TakeDamage(1);
         }
         if(collision.CompareTag("Gizmo"))
         {
